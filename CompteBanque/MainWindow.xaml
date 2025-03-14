@@ -55,7 +55,7 @@
         <Button Command="{Binding commandConnexion}" Content="Connexion" HorizontalAlignment="Left" Margin="333,212,0,0" VerticalAlignment="Top" Width="120"/>
         
         <Label Content="Solde : " HorizontalAlignment="Left" Margin="346,237,0,0" VerticalAlignment="Top"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="400,237,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label Content="{Binding compteAuth.Solde}" HorizontalAlignment="Left" Margin="400,237,0,0" VerticalAlignment="Top" Width="53"/>
         
         <Label Content="Ancien NIP" HorizontalAlignment="Left" Margin="300,283,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="393,287,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="98"/>

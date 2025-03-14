@@ -40,8 +40,20 @@ namespace CompteBanque
 
         public Compte compte { get; set; }
 
+        private Compte _cauth;
+        public Compte compteAuth
+        {
+            get { return _cauth; }
+            set {
+                _cauth = value;
+                OnPropertyChanged(nameof(compteAuth));
+            }
+        }
+
         public string NAS { get; set; }
         public string NIP { get; set; }
+
+        public string Nip_Connexion { get; set; }
 
         public ICommand commandNouveauClient { get; set; }
         public ICommand commandNouveauCompte { get; set; }
@@ -82,7 +94,15 @@ namespace CompteBanque
 
         private void Connexion()
         {
-            throw new NotImplementedException();
+            if (clientSelect.Authentifier(Nip_Connexion))
+            {
+                compteAuth = compte;
+            }
+            else
+            {
+                MessageBox.Show("L'authentification a échoué.");
+                compteAuth = null;
+            }
         }
 
         private void NouveauCompte()
