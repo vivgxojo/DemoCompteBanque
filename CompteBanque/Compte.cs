@@ -66,5 +66,10 @@ namespace CompteBanque
             }
         }
 
+        public override string ToString()
+        {
+            return NumeroCompte.ToString();
+        }
+
     }
 }

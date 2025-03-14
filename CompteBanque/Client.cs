@@ -13,7 +13,7 @@ namespace CompteBanque
         public string Employeur { get; set; }
         private string _nas;
         private string _nip;
-        public List<Compte> ListeComptes;
+        public List<Compte> ListeComptes { get; set; } // Besoin de get; set; même si c'est public
 
         public Client() 
         {

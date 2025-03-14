@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CompteBanque
@@ -26,6 +27,17 @@ namespace CompteBanque
         }
 
         public Client client { get; set; }
+
+        private Client _clientS;
+        public Client clientSelect { 
+            get { return _clientS; }
+            set { 
+                _clientS = value;
+                OnPropertyChanged(nameof(clientSelect));
+                OnPropertyChanged(nameof(clientSelect.ListeComptes));
+            }
+        }
+
         public Compte compte { get; set; }
 
         public string NAS { get; set; }
@@ -42,6 +54,7 @@ namespace CompteBanque
         {
             LesClients = new ObservableCollection<Client>();
             client = new Client();
+            clientSelect = new Client();
             compte = new Compte();
 
             commandNouveauClient = new RelayCommand(NouveauClient);
@@ -74,7 +87,18 @@ namespace CompteBanque
 
         private void NouveauCompte()
         {
-            throw new NotImplementedException();
+            if (clientSelect != null)
+            {
+                clientSelect.OuvrirCompte();
+                MessageBox.Show("Le compte a été créé");
+                Client copie = clientSelect;
+                clientSelect = null; // forcer la mise à jour du combobox
+                clientSelect = copie;
+            }
+            else
+            {
+                MessageBox.Show("Vous devez d'abord sélectionner un client");
+            }
         }
 
         private void NouveauClient()
