@@ -47,6 +47,7 @@ namespace CompteBanque
             set {
                 _cauth = value;
                 OnPropertyChanged(nameof(compteAuth));
+                OnPropertyChanged(nameof(compteAuth.ListeTransactions));
             }
         }
 
@@ -54,6 +55,11 @@ namespace CompteBanque
         public string NIP { get; set; }
 
         public string Nip_Connexion { get; set; }
+
+        public string Nip1 { get; set; }
+        public string Nip2 { get; set; }
+
+        public string Montant { get; set; }
 
         public ICommand commandNouveauClient { get; set; }
         public ICommand commandNouveauCompte { get; set; }
@@ -79,17 +85,40 @@ namespace CompteBanque
 
         private void Retirer()
         {
-            throw new NotImplementedException();
+            try
+            {
+                compteAuth.Retirer(decimal.Parse(Montant));
+                OnPropertyChanged(nameof(compteAuth));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Authentification non valide ou " + ex.Message);
+            }
         }
 
         private void Deposer()
         {
-            throw new NotImplementedException();
+            try
+            {
+                compteAuth.Deposer(decimal.Parse(Montant));
+                OnPropertyChanged(nameof(compteAuth));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Authentification non valide ou " + ex.Message);
+            }
         }
 
         private void ChangerNip()
         {
-            throw new NotImplementedException();
+            try
+            {
+                clientSelect.ChangerNIP(Nip1, Nip2);
+                MessageBox.Show("Le nip a bien été modifié");
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Authentification non valide");
+            }
         }
 
         private void Connexion()

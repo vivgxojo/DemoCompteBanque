@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace CompteBanque
         private decimal _solde;
         public decimal Solde { 
             get { return Math.Round(_solde, 2); } 
-            private set { _solde = Math.Round(value, 2); } 
+            set { _solde = Math.Round(value, 2); } 
         }
-        public List<string> ListeTransactions;
+        public ObservableCollection<string> ListeTransactions { get;  set; }
         private static long _compteur = 100000000;
 
         public Compte()
@@ -25,7 +26,7 @@ namespace CompteBanque
             // notament les listes.
             NumeroCompte = ++_compteur;
             Solde = (decimal)0.0;
-            ListeTransactions = new List<string>();
+            ListeTransactions = new ObservableCollection<string>();
         }
 
         public Compte(Client proprietaire)
@@ -33,7 +34,7 @@ namespace CompteBanque
             NumeroCompte = ++_compteur;
             Proprietaire = proprietaire;
             Solde = (decimal)0.0;
-            ListeTransactions = new List<string>();
+            ListeTransactions = new ObservableCollection<string>();
         }
 
         public bool Deposer(decimal montant)
